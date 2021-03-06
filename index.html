@@ -14,12 +14,50 @@
         margin: 20px;
         display: inline-block;
       }
+      body {
+        background: #eee;
+        max-width: 960px;
+        margin: 20px auto;
+      }
+      p,
+      h3,
+      ul {
+        margin: 0;
+        padding: 0;
+      }
+      li {
+        list-style-type: none;
+        background: #fff;
+        margin: 20px auto;
+        padding: 10px 20px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      li.fav {
+        background: #ff9ed2;
+        color: white;
+      }
     </style>
   </head>
   <body>
     <h1>Hello, Vue3</h1>
+
     <div id="app">
+      <a :href="url">Google</a>
       <p v-if="showBooks">{{title}} by {{author}} {{age}}</p>
+      <ul>
+        <li
+          v-for="book in filterBooks"
+          :class="{fav: book.isFav}"
+          @click="toggleFav(book)"
+        >
+          <img :src="book.img" :alt="book.title" />
+          <h3>{{book.title}}</h3>
+          <p>by {{book.author}}</p>
+        </li>
+      </ul>
       <button v-on:click="age++">Increase age</button>
       <button v-on:click="age--">Decrease age</button>
       <div @click="changeTitle('Oathbringer')">Change Title</div>
